@@ -1,0 +1,122 @@
+# Topic is the highest level of organization. It serves as a container
+# for datasets that should live together in their own schema.
+name = "wayne_resa"
+description = "The ETL script for loading the Wayne RESA dump of GSRP centers."
+schema = "childcare"
+
+
+[tables.wayne_resa_gsrp]
+name="wayne_resa_gsrp"
+description = "A list of childcare providers from Wayne RESA"
+unit_of_analysis = "Childcare Provider"
+universe = "Childcare Providers connected to Wayne RESA"
+owner = "Wayne RESA"
+collector = "Wayne RESA"
+# collection_method = "Leave commented if not using"
+collection_reason = "To monitor capacity and quality of childcare providers in Wayne County (MV guess)"
+source_url = "N/A"
+notes = "Leave commented if not using"
+use_conditions = "This was from a project -- don't share externally!"
+# cadence = "Leave commented if not using"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "license_number"
+description = "The provider's license number"
+standard = "MI childcare license number"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "street_address"
+description = "The provider adddress"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "city"
+description = "The provider city"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "state"
+description = "The provider state (all MI)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "zip_code"
+description = "The provider's zip code"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "phone_number"
+description = "The provider's phone number"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "name_on_license"
+description = "The name on the provider license"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "classrooms"
+description = "Licensed classrooms (? guessing MV)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "classrooms_mistar"
+description = "Classrooms according to the mistar portal (?)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "seats_mistar"
+description = "Seats according to the mistar portal (?)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "provider_type"
+description = "CBO (community-based organization) or PSA (public school academies)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "subrecipient_name"
+description = "A business name -- often matching 'name_on_license'"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "hub_contact"
+description = "Not sure, perhaps the main contact of the provider."
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "cecc"
+description = "People. No idea what this is (MV)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "pecc"
+description = "More People. No idea what this is (MV)"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "four_or_five_day_pgrm"
+description = "How many days is the program offered per week."
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "application_type"
+description = "Either 'Direct' or 'MISTAR' -- MISTAR is an online portal where parents can manage their child's enrollment, Direct is where the parent can apply directly to the provider (MV assumption -- FIX THIS)."
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "transportation_available"
+description = "Does the provider supply transportation to those who need it (MV assumption)."
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "curriculum"
+description = "'HighScope' (https://highscope.org/what-we-offer/the-highscope-curriculum/preschool-curriculum/) or 'Creative' https://teachingstrategies.com/product/prek-curriculum/ -- links researched by MV"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "gsrp_quality"
+description = "The 'quality' level of the provider as assessed by GSRP."
+standard = "GSRP Quality level"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "website"
+description = "The provider's website"
+
+[[tables.wayne_resa_gsrp.variables]]
+name = "completed_google_form"
+description = "Has the provider completed the google form (needs more explanation)"
+
+[tables.wayne_resa_gsrp.editions.<edition date>]
+edition_date = "<edition date>"
+notes = "First upload of this dataset"
+raw_path = ""
+start = "<start date>" 
+end = "9999-12-31" # Forever
+published = "<published date>"
+acquired = "<acquired date>" 
+
+
+
