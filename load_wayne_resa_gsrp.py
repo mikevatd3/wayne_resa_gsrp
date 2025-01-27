@@ -6,6 +6,7 @@ from pandera.errors import SchemaError, SchemaErrors
 import tomli
 
 from wayne_resa_gsrp import setup_logging, db_engine, metadata_engine
+from wayne_resa_gsrp.schema import WayneResaGSRP, rename
 from metadata_audit.capture import record_metadata
 from sqlalchemy.orm import sessionmaker
 
@@ -28,21 +29,15 @@ def main(edition_date, metadata_only):
 
     result = (
         pd.read_csv(edition["raw_path"])
-        .rename(
-            columns={
-                "Code": "code",
-                "Title": "title",
-                "Description": "description",
-            }
-        )
-        .drop("Unnamed: 0", axis=1)
+        .rename(columns=rename)
+        .drop("availability_23_24", axis=1) 
     )
 
     logger.info(f"Cleaning {table_name} was successful validating schema.")
 
     # Validate
     try:
-        validated = TableSchema.validate(result)
+        validated = WayneResaGSRP.validate(result)
         logger.info(
             f"Validating {table_name} was successful. Recording metadata."
         )
@@ -54,7 +49,7 @@ def main(edition_date, metadata_only):
         logger.info("Connected to metadata schema.")
 
         record_metadata(
-            TableSchema,
+            WayneResaGSRP,
             __file__,
             table_name,
             metadata,

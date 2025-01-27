@@ -3,47 +3,39 @@ from pandera.typing import Series
 
 
 class WayneResaGSRP(pa.DataFrameModel):
-    license_number: str = pa.Field()
-    street_address: str = pa.Field()
-    city: str = pa.Field()
-    state: str = pa.Field()
-    zip_code: str = pa.Field()
-    phone_number: str = pa.Field()
-    name_on_license: str = pa.Field()
-    classrooms: str = pa.Field()
-    classrooms_mistar: str = pa.Field()
-    seats_mistar: str = pa.Field()
-    provider_type: str = pa.Field()
-    subrecipient_name: str = pa.Field()
-    hub_contact: str = pa.Field()
-    cecc: str = pa.Field() # I don't know what this is
-    pecc: str = pa.Field() # Same with this
-    four_or_five_day_pgrm: str = pa.Field()
-    application_type: str = pa.Field()
-    transportation_available: str = pa.Field()
-    curriculum: str = pa.Field()
-    gsrp_quality: str = pa.Field()
-    website: str = pa.Field()
-    completed_google_form: str = pa.Field()
+    license_number: str = pa.Field(nullable=True)
+    street_address: str = pa.Field(nullable=True)
+    city: str = pa.Field(nullable=True)
+    state: str = pa.Field(nullable=True)
+    zip_code: str = pa.Field(nullable=True)
+    phone_number: str = pa.Field(nullable=True)
+    name_on_license: str = pa.Field(nullable=True)
+    classrooms: int = pa.Field(nullable=True)
+    classrooms_mistar: int = pa.Field(nullable=True)
+    seats_mistar: int = pa.Field(nullable=True)
+    provider_type: str = pa.Field(nullable=True)
+    subrecipient_name: str = pa.Field(nullable=True)
+    hub_contact: str = pa.Field(nullable=True)
+    cecc: str = pa.Field(nullable=True) # I don't know what this is
+    pecc: str = pa.Field(nullable=True) # Same with this
+    four_or_five_day_pgrm: int = pa.Field(nullable=True)
+    application_type: str = pa.Field(nullable=True)
+    transportation_available: str = pa.Field(nullable=True)
+    curriculum: str = pa.Field(nullable=True)
+    gsrp_quality: str = pa.Field(nullable=True)
+    website: str = pa.Field(nullable=True)
+    completed_google_form: str = pa.Field(nullable=True)
 
     class Config:  # type: ignore
         strict = True
         coerce = True
 
-    @pa.check("description")
-    def max_nulls(cls, description: Series[str]) -> bool:
-        """
-        It's okay for some of these to be null, but if there are too many
-        it could indicate a problem.
-        """
-        return description.isna().sum() < 200
-
 
 rename = {
-    "Completed Google Form 23/24 for MISTAR": "completed_google_gorm",
+    "Completed Google Form 23/24 for MISTAR ": "completed_google_form",
     "# of Classrooms in MISTAR": "classrooms_mistar",
     "# GSRP seats in MISTAR": "seats_mistar",
-    "Provider Typ (TO BE HIDDEN)": "provider_type",
+    "Provider Type\n(TO BE HIDDEN)": "provider_type",
     "Subrecipient Name": "subrecipient_name",
     "Name on License": "name_on_license",
     "Street Address": "street_address",
@@ -57,7 +49,7 @@ rename = {
     "# of Classrooms": "classrooms",
     "4 or 5 Day Program ": "four_or_five_day_pgrm",
     "Availability for 23-24SY": "availability_23_24",
-    "Application Typ": "application_type",
+    "Application Type\n(Direct to Provider or MISTAR)": "application_type",
     "Transportation Available": "transportation_available",
     "License #": "license_number",
     "Curriculum": "curriculum",

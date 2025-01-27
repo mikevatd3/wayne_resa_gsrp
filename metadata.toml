@@ -1,9 +1,6 @@
-# Topic is the highest level of organization. It serves as a container
-# for datasets that should live together in their own schema.
 name = "wayne_resa"
 description = "The ETL script for loading the Wayne RESA dump of GSRP centers."
 schema = "childcare"
-
 
 [tables.wayne_resa_gsrp]
 name="wayne_resa_gsrp"
@@ -12,16 +9,14 @@ unit_of_analysis = "Childcare Provider"
 universe = "Childcare Providers connected to Wayne RESA"
 owner = "Wayne RESA"
 collector = "Wayne RESA"
-# collection_method = "Leave commented if not using"
 collection_reason = "To monitor capacity and quality of childcare providers in Wayne County (MV guess)"
 source_url = "N/A"
 notes = "Leave commented if not using"
 use_conditions = "This was from a project -- don't share externally!"
-# cadence = "Leave commented if not using"
 
 [[tables.wayne_resa_gsrp.variables]]
 name = "license_number"
-description = "The provider's license number"
+description = "The provider's license number (unlike in GSRP -- this can be nullable!)"
 standard = "MI childcare license number"
 
 [[tables.wayne_resa_gsrp.variables]]
@@ -109,14 +104,11 @@ description = "The provider's website"
 name = "completed_google_form"
 description = "Has the provider completed the google form (needs more explanation)"
 
-[tables.wayne_resa_gsrp.editions.<edition date>]
-edition_date = "<edition date>"
+[tables.wayne_resa_gsrp.editions.2025-01-01]
+edition_date = "2025-01-01"
 notes = "First upload of this dataset"
-raw_path = ""
-start = "<start date>" 
+raw_path = "V:\\DATA\\Childcare\\Wayne RESA GSRP Providers\\Data\\Raw\\Wayne County Preschool Services 2023_2024 Roster.csv"
+start = "2024-10-01" 
 end = "9999-12-31" # Forever
-published = "<published date>"
-acquired = "<acquired date>" 
-
-
-
+published = "2024-10-01"
+acquired = "2025-01-15" 
